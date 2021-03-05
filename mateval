@@ -1,0 +1,25 @@
+#!/bin/bash
+export DISPLAY=:0
+xhost local:dambam > /dev/null
+
+title="MATLAB R20"
+pid=$(i3-PIDfromTitle "$title")
+if [[ -z $pid ]]; then
+    exit 0
+fi
+text="$*"
+echo "$text"
+echo "$text" | xclip -selection primary
+#echo "$text" | sed -e 's/@@@//g' -e 's/!!!/\;/g' -e 's/###/\./g'  | xclip -selection primary
+#echo "$text" > /home/dambam/test
+#echo "$text" | sed -e 's/@@@//g' -e 's/!!!/\;/g'  >> /home/dambam/test
+
+sock="/run/user/1000/i3/$(ls -t /run/user/1000/i3/ | awk '{print $1}' | grep ipc | head -n 1 | sed 's/=//')"
+title=$(echo "$title" | sed 's/ /\\ /'g)
+crit='[title="'$title'"]'
+i3-msg --socket $sock '[title="'$title'"] focus' > /dev/null
+setxkbmap us
+#sleep .5; xdotool type "$(xclip -o -selection clipboard)" && xdotool key Return
+sleep 0.2; xdotool click 2 && xdotool key Return
+
+

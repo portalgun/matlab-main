@@ -1,0 +1,26 @@
+Do you develop in emacs in a Linux enviornment and use i3-wm and use the Matlab gui and ranger as your file manager?
+Some tools to help you out.
+
+
+
+matlab-main.el
+    matlab-font.el
+        My own syntax highlight (font-lock) for matlab in emacs
+    matlab-debug-external.el
+        Hacky, but effective way to use the matlab debugger in emacs
+        Uses a tcp server and Xorg to communicate with matlab
+        Think it supports all the main features
+        Mydb.m is the matlab backend
+    matlab-functions-external.el
+        send commands to matlab via xorg
+    
+SHELL SCRIPTS
+loadmat - load matlab file via Xorg
+mateval - send command to matlab via Xorg
+openfig - open matlab fig via Xorg
+
+
+Mydb.m
+    See matlab-debug-external.el above
+
+

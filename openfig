@@ -1,0 +1,12 @@
+#!/bin/bash
+fname=$1
+title="MATLAB R20"
+
+pid=$(i3-PIDfromTitle "$title")
+if [[ -z $1 ]] || [[ -z $pid ]]; then
+    exit 0
+fi
+echo "openfig('$1');" | xclip primary
+i3-fTitle "$title"
+setxkbmap us
+sleep 0.2; xdotool click 2 && xdotool key Return

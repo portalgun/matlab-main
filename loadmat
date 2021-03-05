@@ -1,0 +1,18 @@
+#!/bin/bash
+fname=$1
+title="MATLAB R20"
+
+pid=$(i3-PIDfromTitle "$title")
+if [[ -z $1 ]] || [[ -z $pid ]]; then
+    exit 0
+fi
+rePtch='/[LR][0-9]{3}_[0-9]{3}_[0-9]{4}\.mat'
+if [[ $fname =~ $rePtch ]]; then
+    str="p=ptch.load('$1');"
+else 
+    str="load('$1');"
+fi
+echo "$str" | xclip -selection primary
+i3-fTitle "$title"
+setxkbmap us
+sleep 0.2; xdotool click 2 && xdotool key Return
